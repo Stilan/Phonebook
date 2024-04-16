@@ -1,12 +1,12 @@
 package com.example.phonebook.entity;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class PhoneNumber {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id = UUID.randomUUID();
 
     private String number;
@@ -27,9 +27,16 @@ public class PhoneNumber {
 
     private LocalDate dateOfDeletion;
 
-    private UUID userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    private boolean isDeleted = Boolean.FALSE;
+    private boolean isDeleted;
+
+    @Transient
+    public Boolean getIsDeleted() {
+       return dateOfDeletion == null ? Boolean.FALSE : Boolean.TRUE;
+    }
 
     @PrePersist
     private void onCreate() {
