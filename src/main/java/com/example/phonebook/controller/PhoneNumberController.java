@@ -74,8 +74,10 @@ public class PhoneNumberController {
     public ResponseEntity<Page<PhoneNumber>> sortPhoneNumber(@RequestParam(defaultValue = "0") int page,
                                                              @RequestParam(defaultValue = "3") int size,
                                                              @RequestParam(defaultValue = "") String phoneNumberPart,
-                                                             @RequestParam(defaultValue = "2024-01-01") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                                             @RequestParam(defaultValue = "2024-12-31") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+                                                             @RequestParam(defaultValue = "2024-01-31")
+                                                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                                             @RequestParam(defaultValue = "2024-12-31")
+                                                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(phoneNumberService.findAll(pageable, phoneNumberPart, date, endDate));

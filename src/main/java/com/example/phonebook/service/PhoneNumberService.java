@@ -24,10 +24,14 @@ public class PhoneNumberService {
 
     private final PhoneNumberRepository phoneNumberRepository;
 
+    private final UserService userService;
+
     private final PhoneNumberMapper phoneNumberMapper;
 
     public PhoneNumber createPhoneNumber(PhoneNumberDto phoneNumberDto) {
         PhoneNumber savePhoneNumber = phoneNumberMapper.toEntity(phoneNumberDto);
+        User user = userService.getUserDtoById(phoneNumberDto.getUserId());
+        savePhoneNumber.setUser(user);
         return phoneNumberRepository.save(savePhoneNumber);
     }
 

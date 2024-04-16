@@ -36,7 +36,6 @@ class PhoneNumberServiceTest {
         PhoneNumber phoneNumber = new PhoneNumber();
         phoneNumber.setId(UUID.fromString("600e113a-40c3-48f9-aa1d-7fd51d6a4743"));
         phoneNumber.setNumber("89137753322");
-        phoneNumber.setUserId(UUID.fromString("57f3f742-d940-46a5-bde4-df39a49525eb"));
         Mockito.when(phoneNumberRepository.save(any())).thenReturn(phoneNumber);
         Mockito.when(phoneNumberMapper.toEntity(phoneNumberDto)).thenReturn(phoneNumber);
         PhoneNumber result = phoneNumberService.createPhoneNumber(phoneNumberDto);
@@ -60,7 +59,6 @@ class PhoneNumberServiceTest {
         PhoneNumber phoneNumber = new PhoneNumber();
         phoneNumber.setId(UUID.fromString("691bfcf8-9068-4623-ae2c-2fab9f237ff6"));
         phoneNumber.setNumber("89137753322");
-        phoneNumber.setUserId(UUID.fromString("57f3f742-d940-46a5-bde4-df39a49525eb"));
         Mockito.when(phoneNumberMapper.toEntity(phoneNumberDto)).thenReturn(phoneNumber);
         Mockito.when(phoneNumberMapper.toDto(phoneNumber)).thenReturn(phoneNumberDto);
         PhoneNumberDto result = phoneNumberService.updatePhoneNumber
@@ -73,11 +71,10 @@ class PhoneNumberServiceTest {
         PhoneNumber phoneNumber = new PhoneNumber();
         phoneNumber.setId(UUID.fromString("691bfcf8-9068-4623-ae2c-2fab9f237ff6"));
         phoneNumber.setNumber("89137753322");
-        phoneNumber.setUserId(UUID.fromString("57f3f742-d940-46a5-bde4-df39a49525eb"));
         Mockito.when(phoneNumberRepository.findByIdAndIsDeletedFalse(UUID.fromString("691bfcf8-9068-4623-ae2c-2fab9f237ff6")))
                 .thenReturn(Optional.of(phoneNumber));
         Mockito.when(phoneNumberRepository.save(any())).thenReturn(phoneNumber);
         phoneNumberService.deletePhoneNumber(UUID.fromString("691bfcf8-9068-4623-ae2c-2fab9f237ff6"));
-        assertTrue(phoneNumber.isDeleted());
+        assertTrue(phoneNumber.getIsDeleted());
     }
 }
