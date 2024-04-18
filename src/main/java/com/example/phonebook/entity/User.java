@@ -1,13 +1,15 @@
 package com.example.phonebook.entity;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "users")
@@ -22,6 +24,8 @@ public class User {
     private UUID id = UUID.randomUUID();
 
     private String name;
+
+    private String password;
 
     private boolean isDeleted = Boolean.FALSE;
 

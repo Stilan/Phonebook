@@ -1,7 +1,6 @@
 package com.example.phonebook.service;
 
 import com.example.phonebook.dto.PhoneNumberDto;
-import com.example.phonebook.dto.UserDto;
 import com.example.phonebook.entity.PhoneNumber;
 import com.example.phonebook.entity.User;
 import com.example.phonebook.mapper.PhoneNumberMapper;
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Service
