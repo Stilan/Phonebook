@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +20,8 @@ public interface PhoneNumberRepository extends JpaRepository<PhoneNumber, UUID> 
 
     @Query("SELECT u FROM PhoneNumber u WHERE u.number like CONCAT('%',:phoneNumberPart,'%')  and u.dateOfCreation >= :startDate AND u.dateOfCreation <= :endDate")
     Page<PhoneNumber> findAllBy(Pageable pageable, @Param("phoneNumberPart") String phoneNumberPart,@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    List<PhoneNumber> getAllByUserId(UUID idUser);
 
 
 

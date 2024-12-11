@@ -1,6 +1,7 @@
 package com.example.phonebook.controller;
 
 import com.example.phonebook.dto.UserDto;
+import com.example.phonebook.entity.PhoneNumber;
 import com.example.phonebook.entity.User;
 import com.example.phonebook.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,8 +9,16 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @Tag(name = "User_methods")
@@ -57,6 +66,11 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public void deleteStock(@PathVariable UUID id) {
        userService.deleteUser(id);
+    }
+
+    @GetMapping("/PhoneNumber/{idUser}")
+    public ResponseEntity<List<PhoneNumber>> getPhoneNumber(@PathVariable UUID idUser) {
+        return new ResponseEntity<>(userService.getAllPhoneNumber(idUser), HttpStatus.CREATED);
     }
 
 }

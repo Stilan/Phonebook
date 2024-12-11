@@ -1,9 +1,7 @@
 package com.example.phonebook.controller;
 
 import com.example.phonebook.dto.PhoneNumberDto;
-import com.example.phonebook.dto.UserDto;
 import com.example.phonebook.entity.PhoneNumber;
-import com.example.phonebook.entity.User;
 import com.example.phonebook.service.PhoneNumberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

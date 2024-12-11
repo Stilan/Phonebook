@@ -12,6 +12,7 @@ create table users (
     id uuid not null,
     isDeleted boolean not null,
     name varchar(255),
+    password varchar(255),
     primary key (id)
                    );
 alter table if exists PhoneNumber add constraint FK4bjp1f3y42c6xbcqf70dmhjoo foreign key (user_id) references users;
