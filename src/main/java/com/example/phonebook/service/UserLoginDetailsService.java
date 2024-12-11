@@ -21,6 +21,7 @@ public class UserLoginDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String name) {
 
         User user = userRepository.getUserByName(name).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found? ", name)));
+        System.out.println(user.getPassword());
         return new UserLoginDetails(user);
     }
     public UUID getIdUser(String name) {

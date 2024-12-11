@@ -30,14 +30,12 @@ public class SpringConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(a -> {
-                    a.requestMatchers("/auth/login").permitAll();
+                    a.requestMatchers("/auth/login","/user/create").permitAll();
                     a.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
-    //$2a$10$CxDUQE837oRgYBwrAxv94.bs2X3hF7dtFd0UqF7RoWL.66/JzSkhu
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

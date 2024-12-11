@@ -2,6 +2,7 @@ package com.example.phonebook.controller;
 
 import com.example.phonebook.entity.PhoneNumber;
 import com.example.phonebook.entity.User;
+import com.example.phonebook.repository.UserRepository;
 import com.example.phonebook.service.AuthService;
 import com.example.phonebook.service.UserLoginDetailsService;
 import com.example.phonebook.service.UserService;
@@ -26,11 +27,15 @@ public class AuthController {
     private final AuthService authService;
     private final UserLoginDetailsService userLoginDetails;
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @GetMapping("/login")
     public ResponseEntity<String> loginPerson(@RequestBody User user)  {
+        User y = userRepository.getUserByName(user.getName()).orElseThrow();
+        System.out.println(y.getPassword());
         UserDetails personDetails = userLoginDetails.loadUserByUsername(user.getName());
-        if (!personDetails.isEnabled()) return ResponseEntity.status(HttpStatus.LOCKED).body("Person is blocked!");
+        System.out.println(user.getPassword());
+        System.out.println(personDetails.getPassword());
         if (passwordEncoder.matches(user.getPassword(), personDetails.getPassword())) {
             System.out.println(personDetails.getUsername());
             List<PhoneNumber> phoneNumbers = userService.getAllPhoneNumber(userLoginDetails.getIdUser(personDetails.getUsername()));
